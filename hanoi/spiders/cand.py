@@ -16,8 +16,8 @@ arr = [
 tag = []
 
 try:
-    feedLists = glob.glob(DIR_FEED_LISTS + '*')
-    # feedLists = glob.glob(DIR_FEED_LISTS + 'test-*')
+    # feedLists = glob.glob(DIR_FEED_LISTS + '*')
+    feedLists = glob.glob(DIR_FEED_LISTS + 'cand_*')
     # goes through feeds
     for feedList in feedLists:
         feedFile = open(feedList, 'r')
@@ -34,8 +34,8 @@ except:
     print "Error: unable to fetch the data"
 
 #use XmlPathSelector (other one is HtmlXPathSelector - for HTML data)
-class NewsSpider(XMLFeedSpider):
-    name = 'news'
+class CandSpider(XMLFeedSpider):
+    name = 'cand'
     start_urls = arr
     iterator = 'iternodes'  # This is actually unnecessary, since it's the default value
     itertag = 'item'
@@ -51,7 +51,7 @@ class NewsSpider(XMLFeedSpider):
             item['desc'] = node.xpath('//item/description/text()').extract()[0]
             item['url'] = node.xpath('//item/link/text()').extract()[0]
             item['pub_date'] = node.xpath('//item/pubDate/text()').extract()[0]
-            item['image'] = node.xpath('//item/summaryImg/text()').extract()[0]
+            # item['image'] = node.xpath('//item/summaryImg/text()').extract()[0]
             item['tag'] = 'sport'
             item['created_at'] = datetime.now()
         except:
