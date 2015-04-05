@@ -3,4 +3,4 @@
 *.egg-info
 build
 setup.py
-feed-list/*
+feed-lists/*
