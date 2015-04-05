@@ -13,3 +13,14 @@ class StockItem(scrapy.Item):
     name = scrapy.Field()
     stock_id = scrapy.Field()
     pass
+
+class NewsItem(scrapy.Item):
+    # define the fields for your item here like:
+    url = scrapy.Field()
+    title = scrapy.Field()
+    desc = scrapy.Field()
+    image = scrapy.Field()
+    pub_date = scrapy.Field()
+    tag = scrapy.Field()
+    created_at = scrapy.Field()
+    pass
