@@ -17,7 +17,7 @@ tag = []
 
 try:
     # feedLists = glob.glob(DIR_FEED_LISTS + '*')
-    feedLists = glob.glob(DIR_FEED_LISTS + '24h_*')
+    feedLists = glob.glob(DIR_FEED_LISTS + 'bongdaplus_*')
     # goes through feeds
     for feedList in feedLists:
         feedFile = open(feedList, 'r')
@@ -34,8 +34,8 @@ except:
     print "Error: unable to fetch the data"
 
 #use XmlPathSelector (other one is HtmlXPathSelector - for HTML data)
-class NewsSpider(XMLFeedSpider):
-    name = 'news'
+class BongdaplusSpider(XMLFeedSpider):
+    name = 'bongdaplus'
     start_urls = arr
     iterator = 'iternodes'  # This is actually unnecessary, since it's the default value
     itertag = 'item'
@@ -50,11 +50,12 @@ class NewsSpider(XMLFeedSpider):
             item['title'] = node.xpath('//item/title/text()').extract()[0]
             item['desc'] = node.xpath('//item/description/text()').extract()[0]
             item['url'] = node.xpath('//item/link/text()').extract()[0]
-            item['pub_date'] = node.xpath('//item/pubDate/text()').extract()[0]
-            item['image'] = node.xpath('//item/summaryImg/text()').extract()[0]
+            # item['pub_date'] = node.xpath('//item/pubdate/text()').extract()[0]
+            # item['image'] = node.xpath('//item/media:content/@url/text()').extract()[0]
             item['tag'] = 'sport'
             item['created_at'] = datetime.now()
         except:
+            print item
             print "Error: unable to parse the node"
             return None
 
